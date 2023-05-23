@@ -8,10 +8,10 @@ import authRouter from "./auth.routes";
 import bookRouter from "./book";
 import contentRoutes from "./content.routes";
 import emojis from "./emojis";
-import fileRouter from "./file.routes";
+
 import { menuRoutes } from "./menu.routes";
 import { usersRoutes } from "./users.routes";
-import drugRouter from "./drug.routes";
+import drugRouter from "./drug/index.routes";
 
 const router = express.Router();
 
@@ -28,7 +28,6 @@ router.use("/menu", menuRoutes);
 router.use("/users", usersRoutes);
 router.use("/content", contentRoutes);
 router.use("/book", bookRouter);
-router.use("/file", fileRouter);
 router.use("/drug", drugRouter);
 
 export default router;

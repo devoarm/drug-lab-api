@@ -20,31 +20,37 @@ export const LoginController = async (req: Request, res: Response) => {
       .leftJoin("hr_prefix as pf", "pf.HR_PREFIX_ID", "hr_person.HR_PREFIX_ID")
       .where("HR_USERNAME", body.username)
       .andWhere("HR_PASSWORD", md5(body.password))
-      .limit(1);    
+      .limit(1);
     if (checkLogin.length > 0) {
-      const getRole = await dbOffice("sys_permis_list").where('PERSON_ID',checkLogin[0].ID)
-      const roleMap = getRole.map((item)=>{
-        return item.PERMIS_ID        
-      })
-     
+      const getRole = await dbOffice("sys_permis_list").where(
+        "PERSON_ID",
+        checkLogin[0].ID
+      );
+      const roleMap = getRole.map((item) => {
+        return item.PERMIS_ID;
+      });
       var token = jwt.sign(
         {
           username: checkLogin[0].HR_USERNAME,
           userId: checkLogin[0].ID,
-          // role: role,
-          role:roleMap,
+          hr_department_id: checkLogin[0].HR_DEPARTMENT_ID,
+          hr_department_sub_id: checkLogin[0].HR_DEPARTMENT_SUB_ID,
+          role: roleMap,
           p_name: checkLogin[0].HR_PREFIX_NAME,
           f_name: checkLogin[0].HR_FNAME,
           l_name: checkLogin[0].HR_LNAME,
+          leaderId: process.env.LEADER_ID,
+          leaderName: process.env.LEADER_NAME,
         },
         secret,
-        { expiresIn: "1h" }
+        { expiresIn: "4h" }
       );
       return res.json({
         status: 200,
         msg: "success",
         results: token,
-        role:roleMap
+        // logs: checkLogin
+        // role: roleMap,
       });
     } else {
       return res.json({
@@ -52,7 +58,7 @@ export const LoginController = async (req: Request, res: Response) => {
         msg: "noUser",
       });
     }
-  } catch (error:any) {
+  } catch (error: any) {
     return res.json({ status: 500, err: error.message });
   }
 };

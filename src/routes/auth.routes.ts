@@ -13,9 +13,9 @@ authRouter.get<{}, MessageResponse>("/", (req, res) => {
     results: "Auth API - 👋🌎🌍🌏",
   });
 });
-authRouter.get("/me/:token",verifyToken,MeController);
 authRouter.post("/login", LoginController);
 authRouter.post("/register", RegisterController);
+authRouter.get("/me/:token",verifyToken,MeController);
 
 
 

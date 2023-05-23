@@ -1,28 +1,49 @@
-import { Knex } from "knex";
+import { Schema, model } from "mongoose";
 
-declare module "knex/types/tables" {
-  interface DrugBox {
-    drug_box_id: number;
-    drug_box_name: string;
-    drug_box_status: string;
-    current_send_person: string;
-    current_receive_person: string;
-    current_prepare_person: string;
-    current_ward: string;
-    date_time: string;
-  }
+const schema = new Schema({
+  name: { type: String, required: true },
+  drug_box_name: { type: String, require: true },
+  drug_box_service: [
+    {
+      current_send_person: { type: String },
+      current_receive_person: { type: String },
+      current_prepare_person: { type: String },
+      current_ward: { type: String },
+      specified: {
+        _id: {
+          type: "ObjectId",
+        },
+        text: {
+          type: "String",
+        },
+      },
+      drug_exp: {
+        _id: {
+          type: "ObjectId",
+        },
+        name: {
+          type: "String",
+        },
+      },
+      use_drug_item: [
+        {
+          _id: {
+            type: "ObjectId",
+          },
+          name: {
+            type: "String",
+          },
+          count:{
+            type: Number
+          }
+        },
+      ],
+      status: { type: String, required: true },
+      date_time: { type: Date },
+      exp_date: { type: Date },
+    },
+  ],
+});
 
-  interface Tables {
-    drug_box: DrugBox;
-  }
-}
-export interface DrugBoxType {
-  drug_box_id: number;
-  drug_box_name: string;
-  drug_box_status: string;
-  current_send_person: string;
-  current_receive_person: string;
-  current_prepare_person: string;
-  current_ward: string;
-  date_time: string;
-}
+const DrugBoxs = model("drug_boxs", schema);
+export default DrugBoxs;
