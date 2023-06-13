@@ -8,14 +8,14 @@ import dbOffice from "../../config/dbOffice";
 import multer from "multer";
 
 require("dotenv").config();
-const DOCUMENT_PATH = process.env.DOCUMENT_PATH;
+const DOCUMENT_BOOKIN_PATH = process.env.DOCUMENT_BOOKIN_PATH;
 const secret = process.env.SECRET_KEY;
 import path from "path";
 var glob = require("glob");
 
 export const CheckFile = async (req:Request, res:Response) => {
   const { name } = req.params;
-  glob(`${DOCUMENT_PATH}/bookin/${name}`, function (err:any, files:any) {
+  glob(`${DOCUMENT_BOOKIN_PATH}/bookin/${name}`, function (err:any, files:any) {
     if (files.length > 0) {
       console.log(files);
       return res.json({ status: 200, msg: "has data" });
@@ -35,7 +35,7 @@ export const GetFile = async (req:Request, res:Response) => {
       console.log(fileName);
     }
     var options = {
-      root: `${DOCUMENT_PATH}/bookin`,
+      root: `${DOCUMENT_BOOKIN_PATH}`,
     };
     res.sendFile(fileName, options, function (err) {
       if (err) {
@@ -53,7 +53,7 @@ export const updateFile = async (req:Request, res:Response) => {
     const { filename } = req.params;
     const storage = multer.diskStorage({
       destination: function (req:Request, file, callback) {
-        callback(null, `${DOCUMENT_PATH}/bookin`);
+        callback(null, `${DOCUMENT_BOOKIN_PATH}/bookin`);
       },
       filename: function (req:Request, file, callback) {
         console.log(`${filename}.${file.fieldname}`);

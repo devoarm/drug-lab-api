@@ -13,6 +13,7 @@ import { CheckFile, GetFile, updateFile } from "../../controller/book/file.contr
 
 const fileRouter = express.Router();
 
+fileRouter.get("/book-index", GetFile);
 fileRouter.get("/check/:name", CheckFile);
 fileRouter.get("/book-index/:name", GetFile);
 // fileRouter.post("/update-book/:filename", multipartUpload, updateFile);

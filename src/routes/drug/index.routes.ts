@@ -13,6 +13,7 @@ import {
   sendBox,
 } from "../../controller/drug/drugBox.controller";
 import verifyToken from "../../middleware/auth";
+import drugBacklogRouter from "./drug-backlog.routes";
 import drugBoxRouter from "./drug-box.routes";
 
 var express = require("express");
@@ -20,6 +21,7 @@ var express = require("express");
 var drugRouter = express.Router();
 
 drugRouter.use("/drug-box", drugBoxRouter);
+drugRouter.use("/drug-backlog", drugBacklogRouter);
 /* GET home page. */
 drugRouter.get("/drugbox-item", getDrugBoxItem);
 drugRouter.get("/dashboard", verifyToken, getDashboardDrugBox);

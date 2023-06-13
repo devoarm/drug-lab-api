@@ -1,0 +1,647 @@
+[
+  {    
+    "name": "ภารกิจด้านอำนวยการ",
+    "book_num": "สก 0032.301/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "กลุ่มงานทรัพยากรบุคคล",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "3315",
+        "leader_hr_id": "1",
+        "phone_in": "506",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานบัญชี",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "8",
+        "leader_hr_id": "6",
+        "phone_in": "555",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการเงิน",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "18",
+        "leader_hr_id": "12",
+        "phone_in": "190",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานพัสดุ",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "3339",
+        "leader_hr_id": "297",
+        "phone_in": "504",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานโครงสร้างพื้นฐานและวิศวกรรมทางการแพทย์",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "3183",
+        "leader_hr_id": "285",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานยานพาหนะ",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "296",
+        "leader_hr_id": "285",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานธุรการ",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "3088",
+        "leader_hr_id": "3088",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานรักษาความปลอดภัย",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "288",
+        "leader_hr_id": "285",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานบริหารทั่วไป",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "6",
+        "leader_hr_id": "285",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานซักฟอก",
+        "isActive": "True",
+        "book_num": "สก 0033.301/",
+        "book_hr_id": "6",
+        "leader_hr_id": "285",
+        "phone_in": "",
+        "line_token_set": ""
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "6",
+    "phone_id": "525",
+    "line_token": "",
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  },
+  {    
+    "name": "ภารกิจด้านบริการปฐมภูมิ",
+    "book_num": "สก 0032.302/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "กลุ่มงานอาชีวเวชกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานป้องกันควบคุมโรคระบาดวิทยา",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานส่งเสริมสุขภาพและฟื้นฟู",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานเวชปฏิบัติครอบครัวและชุมชนและศูนย์สุขภาพเขตเมือง",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานคุ้มครองผู้บริโภค",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานพัฒนาระบบบริปฐมภูมิและสนับสนุนเครือข่าย",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการแพทย์แผนไทยและการแพทย์ทางเลือก",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3123",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานเวชกรรมสังคม",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": null,
+        "line_token_set": null
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลชุมชน",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": null,
+        "line_token_set": null
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "381",
+    "phone_id": "118/117",
+    "line_token": "",
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  },
+  {    
+    "name": "ภารกิจด้านพัฒนาระบบบริการและสนับสนุนบริการสุขภาพ",
+    "book_num": "สก 0032.303/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "กลุ่มงานยุทธศาสตร์และแผนงานโครงการ",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "3083",
+        "leader_hr_id": "258",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานสารสนเทศทางการแพทย์",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "276",
+        "leader_hr_id": "274",
+        "phone_in": "103",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานประกันสุขภาพ",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "3083",
+        "leader_hr_id": "277",
+        "phone_in": "135",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานพัฒนาทรัพยากรบุคคล ",
+        "isActive": "True",
+        "book_num": "สก 0033.307/",
+        "book_hr_id": "260",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "งานเวชระเบียน",
+        "isActive": "True",
+        "book_num": "สก 0032.303/",
+        "book_hr_id": "3083",
+        "leader_hr_id": "264",
+        "phone_in": "411",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงาน พรส",
+        "isActive": "True",
+        "book_num": "สก 0033.307/",
+        "book_hr_id": "3083",
+        "leader_hr_id": "258",
+        "phone_in": null,
+        "line_token_set": null
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "258",
+    "phone_id": "414",
+    "line_token": "",
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  },
+  {    
+    "name": "ภารกิจด้านการทุติยภูมิและตติยภูมิ",
+    "book_num": "สก 0032.304/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "กลุ่มงานเวชศานตร์ฉุกเฉิน",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานอายุรกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานศัลยกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานศัลยกรรมออร์โธปิดิกส์",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานกุมารเวชกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานนิติเวช",
+        "isActive": "True",
+        "book_num": "",
+        "book_hr_id": "",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานจักษุวิทยา",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานโสต ศอ นาสิก",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานโภชนศาสตร์",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "3214",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานพยาธิวิทยากายวิภาค",
+        "isActive": "True",
+        "book_num": "",
+        "book_hr_id": "",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานสูติ-นรีเวชกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานวิสัญญีวิทยา",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานจิตเวชและยาเสพติด",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานทันตกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.302/",
+        "book_hr_id": "363",
+        "leader_hr_id": "355",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานรังสีวิทยา",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "3078",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานเทคนิคการแพทย์และพยาธิวิทยาคลินิก",
+        "isActive": "True",
+        "book_num": "สก 0033.303/",
+        "book_hr_id": "33",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานเวชกรรมฟื้นฟู",
+        "isActive": "True",
+        "book_num": "สก 0033.302/",
+        "book_hr_id": "3146",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานสังคมสงเคราะห์",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานเภสัชกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.306/",
+        "book_hr_id": "198",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานผู้ป่วยนอก",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3249",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "",
+    "phone_id": "104/206",
+    "line_token": "",
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  },
+  {    
+    "name": "ภารกิจด้านการพยาบาล",
+    "book_num": "สก 0032.305/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "กลุ่มการพยาบาล",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยอุบัติเหตุและฉุกเฉิน",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยหนัก",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้คลอด",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยห้องผ่าตัด",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลวิสัญญี",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยอายุรกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยศัลยกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยสูติ-นรีเวช",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยกุมารเวชกรรม",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยออร์โธปิดิกส์",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยโสต ศอ นาสิก จักษุ",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลด้านการควบคุมและป้องกันการติดเชื้อ",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานวิจัยและพัฒนาการพยาบาล",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลผู้ป่วยนอก OPD",
+        "isActive": "True",
+        "book_num": "สก 0033.305/",
+        "book_hr_id": "3073",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มงานการพยาบาลจิตเวช",
+        "isActive": "True",
+        "book_num": "สก 0033.304/",
+        "book_hr_id": "3062",
+        "leader_hr_id": "",
+        "phone_in": null,
+        "line_token_set": null
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "53",
+    "phone_id": "244",
+    "line_token": "",
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  },
+  {    
+    "name": "ภารกิจด้านผลิตบุคลากรทางการแพทย์",
+    "book_num": "สก 0032.306/",
+    "department_sub": [
+      {
+        "hr_department_sub_name": "ภารกิจด้านผลิตบุคลากรทางการแพทย์",
+        "isActive": "True",
+        "book_num": "สก 0033.302/",
+        "book_hr_id": "260",
+        "leader_hr_id": "",
+        "phone_in": "",
+        "line_token_set": ""
+      },
+      {
+        "hr_department_sub_name": "กลุ่มแพทย์",
+        "isActive": "True",
+        "book_num": "สก 0033.302/",
+        "book_hr_id": "3365",
+        "leader_hr_id": "",
+        "phone_in": null,
+        "line_token_set": null
+      }
+    ],
+    "isActive": "True",
+    "leader_hr_id": "",
+    "phone_id": "525",
+    "line_token": null,
+    "hr_depart_id": null,
+    "createAt": "2023-05-29 13:05:05",
+    "updateAt": "2023-05-29 13:05:05"
+  }
+]

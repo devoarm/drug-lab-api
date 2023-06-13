@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import dbOffice from "../../config/dbOffice";
+import BookIns from "../../model/app/bookIns.model";
 const saltRounds = 10;
 
 require("dotenv").config();
@@ -47,5 +48,24 @@ export const SearchFullnamePerson = async (req: Request, res: Response) => {
     return res.json({ status: 500, err: error.message });
   }
 };
-
-
+export const PersonSendToSign = async (req: Request, res: Response) => {
+  const { idBook } = req.params;
+  try {
+    const query =
+      await dbOffice.raw(`SELECT CONCAT(pf.HR_PREFIX_NAME,hp.HR_FNAME," ",hp.HR_LNAME) AS fullname,hp.ID as id FROM hr_person hp
+  LEFT JOIN hr_prefix pf ON hp.HR_PREFIX_ID = pf.HR_PREFIX_ID`);
+    const findSendSign: any = await BookIns.findOne({ _id: idBook });
+    const mapPerson = query[0].map((item: any) => {
+      const check = findSendSign.send_to_sign.filter(
+        (itemFil: any) => item.id == itemFil.person_id
+      );
+      return {
+        ...item,
+        status_send: check.length > 0 ? true : false,
+      };
+    });
+    return res.json({ status: 200, results: mapPerson });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};

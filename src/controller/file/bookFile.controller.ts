@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
-const DOCUMENT_PATH = process.env.DOCUMENT_PATH;
+const DOCUMENT_BOOKIN_PATH = process.env.DOCUMENT_BOOKIN_PATH;
 export const GetFileBook = async (req:Request, res:Response) => {
     try {
       var fileName = req.params.name;
       var options = {
-        root: `${DOCUMENT_PATH}/bookin`,
+        root: `${DOCUMENT_BOOKIN_PATH}/bookin`,
       };    
       res.sendFile(fileName, options, function (err) {
         if (err) {

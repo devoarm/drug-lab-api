@@ -12,6 +12,10 @@ import emojis from "./emojis";
 import { menuRoutes } from "./menu.routes";
 import { usersRoutes } from "./users.routes";
 import drugRouter from "./drug/index.routes";
+import itemRoutes from "./item.routes";
+import blogRouter from "./blog.routes";
+import authenNhsoRouter from "./authenNHSO.routes";
+
 
 const router = express.Router();
 
@@ -29,5 +33,8 @@ router.use("/users", usersRoutes);
 router.use("/content", contentRoutes);
 router.use("/book", bookRouter);
 router.use("/drug", drugRouter);
+router.use("/item", itemRoutes);
+router.use("/blog", blogRouter);
+router.use("/auth-nhso", authenNhsoRouter);
 
 export default router;

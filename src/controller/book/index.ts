@@ -5,13 +5,77 @@ import dbOffice from "../../config/dbOffice";
 const secret = process.env.SECRET_KEY;
 import multer from "multer";
 import moment from "moment";
+import BookIns from "../../model/app/bookIns.model";
+import BookYear from "../../model/app/bookYear.model";
 
+//start new database
+export const BookSendToSign = async (req: Request, res: Response) => {
+  const _id = req.params;
+  const { data } = req.body;
+  try {
+    const query = await BookIns.updateOne(
+      { _id: _id },
+      {
+        $push: {
+          send_to_sign: {
+            $each: [data],
+            $position: 0,
+          },
+        },
+      }
+    );
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const GetBookYear = async (req: Request, res: Response) => {
+  try {
+    const query = await BookYear.find({ active: true }, { _id: 1, year: 1 });
+    const mapQ = query.map((item: any) => {
+      return {
+        id: item._id,
+        year: item.year,
+      };
+    });
+    return res.json({ status: 200, results: mapQ });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const AddBookYear = async (req: Request, res: Response) => {
+  try {
+    const { data } = req.body;
+    const query = await BookYear.create(data);
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const BookSendPerson = async (req: Request, res: Response) => {
+  const { _id, person_id } = req.query;
+  try {
+    const query = await BookIns.find({
+      _id:_id,
+      send_to_sign: {
+        $elemMatch: {
+          person_id: person_id          
+        },
+      },
+    });
 
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+
+//end new database
 
 export const BookInsert = async (req: Request, res: Response) => {
   const data = req.body;
   try {
-    const query = await dbOffice('book_org').limit(1)
+    const query = await dbOffice("book_org").limit(1);
     res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
@@ -26,22 +90,7 @@ export const BookOrg = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
-export const BookSendPerson = async (req: Request, res: Response) => {
-  const data = req.body;
-  try {
-    const query = await dbOffice("book_send_person").insert({
-      BOOK_ID: data.BOOK_ID,
-      HR_PERSON_ID: data.HR_PERSON_ID,
-      READ_STATUS: "False",
-      SEND_BY_ID: data.SEND_BY_ID,
-      SEND_BY_NAME: data.SEND_BY_NAME,
-      SEND_DATE_TIME: data.SEND_DATE_TIME,
-    });
-    return res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
+
 export const BookSendDep = async (req: Request, res: Response) => {
   const data = req.body;
   try {
@@ -70,7 +119,7 @@ export const BookUpdatePdf = async (req: Request, res: Response) => {
     const { id } = req.params;
     const storage = multer.diskStorage({
       destination: function (req: Request, file: any, callback: any) {
-        callback(null, `${process.env.DOCUMENT_PATH}`);
+        callback(null, `${process.env.DOCUMENT_BOOKIN_PATH}`);
       },
       filename: function (req: Request, file: any, callback: any) {
         const ext = file.mimetype.split("/").filter(Boolean).slice(1).join("/");
