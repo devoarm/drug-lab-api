@@ -14,7 +14,8 @@ import { usersRoutes } from "./users.routes";
 import drugRouter from "./drug/index.routes";
 import itemRoutes from "./item.routes";
 import blogRouter from "./blog.routes";
-import authenNhsoRouter from "./authenNHSO.routes";
+import authenNhsoRouter from "./authenNhso.routes";
+
 
 
 const router = express.Router();
