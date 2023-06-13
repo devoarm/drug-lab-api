@@ -10,8 +10,7 @@ import {
 
 const authenNhsoRouter = express.Router();
 
-
-authenNhsoRouter.post("/register", registerNhso);
-authenNhsoRouter.get("/:pid", getRegisterNhso);
+authenNhsoRouter.post("/register", verifyToken, registerNhso);
+authenNhsoRouter.get("/:pid", verifyToken, getRegisterNhso);
 
 export default authenNhsoRouter;

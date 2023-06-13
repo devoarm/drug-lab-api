@@ -19,15 +19,15 @@ var express = require("express");
 
 var drugBoxRouter = express.Router();
 
-drugBoxRouter.get("/dashboard", getDashboardDrugBox);
-drugBoxRouter.get("/item", getDrugBoxItem);
+drugBoxRouter.get("/dashboard",verifyToken, getDashboardDrugBox);
+drugBoxRouter.get("/item",verifyToken, getDrugBoxItem);
 drugBoxRouter.get("/person", verifyToken, getPerson);
-drugBoxRouter.get("/box", getDrugBox);
+drugBoxRouter.get("/box", verifyToken,getDrugBox);
 drugBoxRouter.post("/prepare-box", verifyToken, prepareBox);
 drugBoxRouter.post("/send-box", verifyToken, sendBox);
 drugBoxRouter.post("/receive-box", verifyToken, receiveBox);
-drugBoxRouter.get("/ward", getWard);
-drugBoxRouter.get("/specified", getSpecified);
+drugBoxRouter.get("/ward",verifyToken, getWard);
+drugBoxRouter.get("/specified",verifyToken, getSpecified);
 
 export default drugBoxRouter;
 
