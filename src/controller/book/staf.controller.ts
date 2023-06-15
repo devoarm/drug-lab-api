@@ -122,10 +122,25 @@ export const addBooks = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const UpdateBooks = async (req: Request, res: Response) => {
+  try {
+    const { idBook } = req.params;
+    const { data } = req.body;
+    const findBook = await BookIns.findOneAndUpdate(
+      { _id: idBook },
+      { ...data }
+    );
+
+    return res.json({ status: 200, results: findBook });
+  } catch (error: any) {
+    console.log(error.message);
+    return res.json({ status: 500, results: error.message });
+  }
+};
 export const getBooksSendToSign = async (req: Request, res: Response) => {
-  const {_id} = req.params
-  try {    
-    const query = await BookIns.findById('')
+  const { _id } = req.params;
+  try {
+    const query = await BookIns.findById("");
     return res.json({ status: 200, results: query });
   } catch (error: any) {
     console.log(error.message);

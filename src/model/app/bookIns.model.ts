@@ -5,10 +5,7 @@ const schema = new Schema({
     type: "Number",
     require: true,
   },
-  year_main: {
-    type: "Date",
-    require: true,
-  },
+  year_main: "String",
   type: {
     _id: {
       type: "ObjectId",

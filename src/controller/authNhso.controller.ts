@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import { reqRegister } from "../interfaces/auth.type";
 import moment from "moment";
 import Authens from "../model/app/authens.model";
+import dbHos from "../config/dbHos";
 const secret: any = process.env.SECRET_KEY;
 const saltRounds = 10;
 
@@ -25,6 +26,34 @@ export const registerNhso = async (req: Request, res: Response) => {
   try {
     const query = await Authens.create(data);
     return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const checkAuthByDate = async (req: Request, res: Response) => {
+  const {date} = req.params
+  try {
+    const query = await dbHos.raw(`SELECT 
+		p.cid,
+		p.pname,
+		p.fname,
+		p.lname,
+    o.vn,
+    o.hn,		
+    o.vstdate,
+    o.vsttime,
+    o.hospmain,
+    o.pttype,
+    o.main_dep,
+		k.department
+  FROM ovst o 
+	LEFT JOIN patient p ON p.hn = o.hn
+	LEFT JOIN kskdepartment k ON k.depcode = o.main_dep
+	WHERE o.vstdate = '${date}'
+  AND p.nationality = '99'
+	GROUP BY p.hn
+  ORDER BY vsttime`);
+    return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
