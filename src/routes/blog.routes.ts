@@ -43,6 +43,7 @@ blogRouter.get("/", async (req, res) => {
     res.json({ status: 500, results: error.message });
   }
 });
+blogRouter.post("/", AddContent);
 blogRouter.get("/content/:id", async (req, res) => {
   const { id } = req.params
   try {
@@ -71,6 +72,7 @@ blogRouter.get("/content/:id", async (req, res) => {
     res.json({ status: 500, results: error.message });
   }
 });
-blogRouter.post("/", AddContent);
+
+
 
 export default blogRouter;
