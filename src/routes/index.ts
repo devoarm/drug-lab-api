@@ -15,6 +15,7 @@ import drugRouter from "./drug/index.routes";
 import itemRoutes from "./item.routes";
 import blogRouter from "./blog.routes";
 import authenNhsoRouter from "./authenNhso.routes";
+import dbudgetRoutes from "./dbudget.routes";
 
 
 
@@ -37,5 +38,6 @@ router.use("/drug", drugRouter);
 router.use("/item", itemRoutes);
 router.use("/blog", blogRouter);
 router.use("/auth-nhso", authenNhsoRouter);
+router.use("/dbudget", dbudgetRoutes);
 
 export default router;

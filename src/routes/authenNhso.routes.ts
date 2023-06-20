@@ -11,7 +11,7 @@ import {
 
 const authenNhsoRouter = express.Router();
 
-authenNhsoRouter.get("/check-auth/:date", checkAuthByDate);
+authenNhsoRouter.post("/check-auth",verifyToken, checkAuthByDate);
 authenNhsoRouter.post("/register", verifyToken, registerNhso);
 authenNhsoRouter.get("/:pid", verifyToken, getRegisterNhso);
 

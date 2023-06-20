@@ -13,6 +13,7 @@ const saltRounds = 10;
 import fs from "fs";
 import Departments from "../model/app/departments.model";
 import Leader from "../model/app/leaders.model";
+import dbHos from "../config/dbHos";
 
 export const mapDepart = async (req: Request, res: Response) => {
   try {
@@ -106,6 +107,14 @@ export const getLeader = async (req: Request, res: Response) => {
   try {
     const query = await Leader.findOne();
     return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const HosWard = async (req: Request, res: Response) => {
+  try {
+    const query = await dbHos.raw(`SELECT k.depcode,k.department FROM kskdepartment k`)
+    return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }

@@ -31,7 +31,7 @@ export const registerNhso = async (req: Request, res: Response) => {
   }
 };
 export const checkAuthByDate = async (req: Request, res: Response) => {
-  const {date} = req.params
+  const { data } = req.body;
   try {
     const query = await dbHos.raw(`SELECT 
 		p.cid,
@@ -43,16 +43,19 @@ export const checkAuthByDate = async (req: Request, res: Response) => {
     o.vstdate,
     o.vsttime,
     o.hospmain,
-    o.pttype,
+    ptt.name AS pttype,
     o.main_dep,
 		k.department
   FROM ovst o 
 	LEFT JOIN patient p ON p.hn = o.hn
+	LEFT JOIN pttype ptt ON ptt.pttype = o.pttype
 	LEFT JOIN kskdepartment k ON k.depcode = o.main_dep
-	WHERE o.vstdate = '${date}'
+	WHERE o.vstdate = '${data.vstdate}'
   AND p.nationality = '99'
+ ${data.ward.depcode != "" ? `AND k.depcode = '${data.ward.depcode}'` : ''}
 	GROUP BY p.hn
   ORDER BY vsttime`);
+
     return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
