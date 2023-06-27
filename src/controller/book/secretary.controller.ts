@@ -44,29 +44,29 @@ export const getBookCheck = async (req: Request, res: Response) => {
   }
 };
 export const getBookById = async (req: Request, res: Response) => {
-  const { _id } = req.params;
+  const { id } = req.params;
   try {
-    //   const query = await dbOffice("book_index_send_leader as bl")
-    //     .leftJoin("book_index as b", "bl.BOOK_ID", "b.ID")
-    //     .leftJoin("book_index_img as bi", "bi.BOOK_ID", "b.ID")
-    //     .leftJoin("book_urgent as bu", "b.BOOK_URGENT_ID", "bu.URGENT_ID")
-    //     .where("b.ID", idBook)
-    //     .orderBy([
-    //       // { column: "bl.TOP_LEADER_AC_DATE_TIME", order: "desc" },
-    //       { column: "bl.SEND_LD_DATE_TIME", order: "desc" },
-    //     ])
-    //     .select(
-    //       "b.ID as BOOK_ID",
-    //       "b.BOOK_NAME",
-    //       "b.BOOK_NUMBER",
-    //       "b.BOOK_DETAIL",
-    //       "b.BOOK_URGENT_ID",
-    //       "bu.URGENT_NAME",
-    //       "bl.*",
-    //       "bi.ID as BOOK_IMAGE_ID",
-    //       "bi.FILE_TYPE"
-    //     ).first()
-    const query = await BookIns.findOne({ _id: _id });
+      const query = await dbOffice("book_index_send_leader as bl")
+        .leftJoin("book_index as b", "bl.BOOK_ID", "b.ID")
+        .leftJoin("book_index_img as bi", "bi.BOOK_ID", "b.ID")
+        .leftJoin("book_urgent as bu", "b.BOOK_URGENT_ID", "bu.URGENT_ID")
+        .where("b.ID", id)
+        .orderBy([
+          // { column: "bl.TOP_LEADER_AC_DATE_TIME", order: "desc" },
+          { column: "bl.SEND_LD_DATE_TIME", order: "desc" },
+        ])
+        .select(
+          "b.ID as BOOK_ID",
+          "b.BOOK_NAME",
+          "b.BOOK_NUMBER",
+          "b.BOOK_DETAIL",
+          "b.BOOK_URGENT_ID",
+          "bu.URGENT_NAME",
+          "bl.*",
+          "bi.ID as BOOK_IMAGE_ID",
+          "bi.FILE_TYPE"
+        ).first()
+    
     return res.json({
       status: 200,
       results: query,

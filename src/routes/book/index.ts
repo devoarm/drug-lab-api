@@ -27,14 +27,20 @@ import {
   BookIndexSendGroup,
   BookIndexSendLeader,
   BookInsert,
-  BookOnRead,  
+  BookOnRead,
   BookReadAllGroup,
   BookReading,
   BookSendPerson,
   BookSendToSecretary,
   BookSendToSign,
   BookUpdatePdf,
+  GetBookById,
   GetBookYear,
+  getBookType,
+  getOrg,
+  getOrgIn,
+  getSecret,
+  getUrgent,
 } from "../../controller/book";
 import verifyToken from "../../middleware/auth";
 import fileRouter from "./file.routes";
@@ -50,10 +56,9 @@ bookRouter.use("/staf", stafRouter);
 
 bookRouter.get<{}, MessageResponse>("/", async (req, res) => {
   // const query = await dbOffice("book_index_send_leader").limit(5);
-  return res.json({status:200,results:'ok'})
+  return res.json({ status: 200, results: "ok" });
 });
 // bookRouter.get("/", BookDirector);
-
 
 bookRouter.post("/book-insert", BookInsert);
 
@@ -66,10 +71,15 @@ bookRouter.post("/book-reading", BookReading);
 bookRouter.post("/book-read-all-group", BookReadAllGroup);
 
 //new database
+bookRouter.get("/org", getOrg);
+bookRouter.get("/org-in", getOrgIn);
+bookRouter.get("/book-type", getBookType);
+bookRouter.get("/urgent", getUrgent);
+bookRouter.get("/secret", getSecret);
 bookRouter.get("/year", GetBookYear);
 bookRouter.post("/year", AddBookYear);
 bookRouter.get("/book-send-person", BookSendPerson);
-bookRouter.get("/:_id", getBookById);
+bookRouter.get("/:id", GetBookById);
 bookRouter.post("/send-to-sign/:_id", BookSendToSign);
 //end new database
 
@@ -82,6 +92,9 @@ bookRouter.get("/book-index-leader-decide/:bookId", BookIndexLeaderDecide);
 bookRouter.get("/book-count-dep/:idDep/:userId/:read", BookIndexCountDep);
 bookRouter.get("/book-count-group/:idDep/:userId/:read", BookIndexCountGroup);
 bookRouter.get("/book-send-dep/:idDep/:limit/:userId/:read", BookIndexSendDep);
-bookRouter.get("/book-send-group/:idDep/:limit/:userId/:read", BookIndexSendGroup);
+bookRouter.get(
+  "/book-send-group/:idDep/:limit/:userId/:read",
+  BookIndexSendGroup
+);
 
 export default bookRouter;

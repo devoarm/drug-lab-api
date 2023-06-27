@@ -47,15 +47,13 @@ export const SearchVn = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
-export const SearchPatientByHn = async (req: Request, res: Response) => {
+export const SearchPatient = async (req: Request, res: Response) => {
   const { slug } = req.params;
   try {
     const query: any = await dbHos.raw(`SELECT 
-    o.*
-  FROM ovst o 
-  LEFT JOIN patient p ON o.hn = p.hn
-  WHERE p.cid = "${slug}" OR p.hn = "${slug}"
-  ORDER BY o.vstdate DESC`);
+    *
+FROM patient p
+WHERE p.cid = "${slug}" OR p.hn = "${slug}" OR CONCAT(p.fname," ",p.lname) LIKE "%${slug}%"`);
     return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });

@@ -14,9 +14,27 @@ require("dotenv").config();
 const DOCUMENT_BOOKIN_PATH = process.env.DOCUMENT_BOOKIN_PATH;
 
 export const bookStaf = async (req: Request, res: Response) => {
+  const { data } = req.body;
   try {
-    const query = await BookIns.find();
-    res.json({ status: 200, results: query });
+    const query = await dbOffice.raw(`SELECT 
+    b.*,
+    bu.URGENT_NAME,
+    bt.BOOK_TYPE_NAME
+  FROM book_index b
+  LEFT JOIN book_urgent bu ON b.BOOK_URGENT_ID = bu.URGENT_ID
+  LEFT JOIN book_type bt ON b.BOOK_TYPE_ID = bt.BOOK_TYPE_ID
+  ${
+    data.type == "date"
+      ? data.endDate != null
+        ? `WHERE b.BOOK_DATE BETWEEN '${moment(data.startDate).format(
+            "YYYY-MM-DD"
+          )}' AND '${moment(data.endDate).format("YYYY-MM-DD")}'`
+        : `WHERE b.BOOK_DATE = '${moment(data.startDate).format("YYYY-MM-DD")}'`
+      : ""
+  }
+  ORDER BY b.BOOK_DATE DESC
+  `);
+    res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
@@ -43,39 +61,43 @@ export const searchBooks = async (req: Request, res: Response) => {
       "bi.FILE_TYPE"
     );
 };
-export const getOrg = async (req: Request, res: Response) => {
-  try {
-    const query = await BookOrgs.find({}, { code: 0 });
-    return res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
-export const getOrgIn = async (req: Request, res: Response) => {
-  try {
-    const query = await BookOrgIns.find({ isActive: true }, { isActive: 0 });
-    return res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
-export const getBookType = async (req: Request, res: Response) => {
-  try {
-    const query = await BookTypes.find();
-    return res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
-export const getUrgent = async (req: Request, res: Response) => {
-  try {
-    const query = await BookUrgents.find();
-    return res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
 export const addFileBooks = async (req: Request, res: Response) => {
+  try {
+    const { num } = req.params;
+    const storage = multer.diskStorage({
+      destination: function (req: Request, file, callback) {
+        callback(null, `${DOCUMENT_BOOKIN_PATH}`);
+      },
+      filename: function (req: Request, file, callback) {
+        // const ext = file.mimetype.split("/").filter(Boolean).slice(1).join("/");
+        // callback(null, `${num}.${ext}`);
+        callback(null, `${num}.${file.fieldname}`);
+      },
+    });
+    var upload = multer({ storage: storage }).single("pdf");
+
+    upload(req, res, function (err) {
+      if (err) {
+        console.log(err);
+        return res.json({ status: 500, results: err.message });
+      } else {
+        return res.json({
+          status: 200,
+          results: {
+            file: {
+              name: num,
+              type: req.file?.fieldname,
+              size: req.file?.size,
+            },
+          },
+        });
+      }
+    });
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+export const UpdateFileWebBooks = async (req: Request, res: Response) => {
   try {
     const { num } = req.params;
     const storage = multer.diskStorage({

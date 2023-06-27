@@ -51,20 +51,27 @@ export const SearchFullnamePerson = async (req: Request, res: Response) => {
 export const PersonSendToSign = async (req: Request, res: Response) => {
   const { idBook } = req.params;
   try {
-    const query =
-      await dbOffice.raw(`SELECT CONCAT(pf.HR_PREFIX_NAME,hp.HR_FNAME," ",hp.HR_LNAME) AS fullname,hp.ID as id FROM hr_person hp
-  LEFT JOIN hr_prefix pf ON hp.HR_PREFIX_ID = pf.HR_PREFIX_ID`);
-    const findSendSign: any = await BookIns.findOne({ _id: idBook });
-    const mapPerson = query[0].map((item: any) => {
-      const check = findSendSign.send_to_sign.filter(
-        (itemFil: any) => item.id == itemFil.person_id
-      );
+    const query = await dbOffice.raw(`SELECT 
+      CONCAT(pf.HR_PREFIX_NAME,hp.HR_FNAME," ",hp.HR_LNAME) AS fullname,
+      hp.ID as id ,
+      hp.POSITION_IN_WORK
+    FROM hr_person hp
+      LEFT JOIN hr_prefix pf ON hp.HR_PREFIX_ID = pf.HR_PREFIX_ID`);
+
+    const checkQ: any = await dbOffice.raw(
+      `SELECT * FROM book_index_send_check b WHERE b.BOOK_ID = '${idBook}'`
+    );
+    const qMap = query[0].map((item: any) => {
       return {
         ...item,
-        status_send: check.length > 0 ? true : false,
+        send:
+          checkQ[0].filter((f: any) => f.SEND_LD_HR_ID == item.ID).length > 0
+            ? true
+            : false,
       };
     });
-    return res.json({ status: 200, results: mapPerson });
+
+    return res.json({ status: 200, results: qMap });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }

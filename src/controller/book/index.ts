@@ -29,16 +29,36 @@ export const BookSendToSign = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const GetBookById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const query = await dbOffice.raw(`SELECT 
+	b.*,
+	bu.URGENT_NAME,
+	bt.BOOK_TYPE_NAME
+FROM book_index b
+LEFT JOIN book_urgent bu ON b.BOOK_URGENT_ID = bu.URGENT_ID
+LEFT JOIN book_type bt ON b.BOOK_TYPE_ID = bt.BOOK_TYPE_ID
+WHERE b.ID = "${id}"
+`);
+    if (query[0].length > 0) {
+      return res.json({
+        status: 200,
+        results: query[0][0],
+      });
+    } else {
+      return res.json({ status: 500, results: "NoBook" });
+    }
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
 export const GetBookYear = async (req: Request, res: Response) => {
   try {
-    const query = await BookYear.find({ active: true }, { _id: 1, year: 1 });
-    const mapQ = query.map((item: any) => {
-      return {
-        id: item._id,
-        year: item.year,
-      };
-    });
-    return res.json({ status: 200, results: mapQ });
+    const query = await dbOffice("book_year")
+      .select("BOOK_YEAR_ID", "BOOK_YEAR_NAME")
+      .orderBy("BOOK_YEAR_ID", "desc");
+    return res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
@@ -52,14 +72,68 @@ export const AddBookYear = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const getOrg = async (req: Request, res: Response) => {
+  try {
+    const query = await dbOffice("book_org").select(
+      "BOOK_ORG_ID",
+      "BOOK_ORG_NAME"
+    );
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const getOrgIn = async (req: Request, res: Response) => {
+  try {
+    const query = await dbOffice("book_org_in").select(
+      "BOOK_ORG_ID",
+      "BOOK_ORG_NAME"
+    );
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const getBookType = async (req: Request, res: Response) => {
+  try {
+    const query = await dbOffice("book_type").select("*");
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const getUrgent = async (req: Request, res: Response) => {
+  try {
+    const query = await dbOffice("book_urgent").select(
+      "URGENT_ID",
+      "URGENT_NAME"
+    );
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const getSecret = async (req: Request, res: Response) => {
+  try {
+    const query = await dbOffice("book_secret").select("*");
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
 export const BookSendPerson = async (req: Request, res: Response) => {
   const { _id, person_id } = req.query;
   try {
     const query = await BookIns.find({
-      _id:_id,
+      _id: _id,
       send_to_sign: {
         $elemMatch: {
-          person_id: person_id          
+          person_id: person_id,
         },
       },
     });
@@ -77,15 +151,6 @@ export const BookInsert = async (req: Request, res: Response) => {
   try {
     const query = await dbOffice("book_org").limit(1);
     res.json({ status: 200, results: query });
-  } catch (error: any) {
-    return res.json({ status: 500, results: error.message });
-  }
-};
-export const BookOrg = async (req: Request, res: Response) => {
-  const data = req.body;
-  try {
-    // const query = await BookIns.create();
-    // res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
