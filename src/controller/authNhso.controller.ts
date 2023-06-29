@@ -52,6 +52,7 @@ export const checkAuthByDate = async (req: Request, res: Response) => {
 	LEFT JOIN kskdepartment k ON k.depcode = o.main_dep
 	WHERE o.vstdate = '${data.vstdate}'
   AND p.nationality = '99'
+  AND ov.pttype NOT IN('10','12','30','01','40')
  ${data.ward.depcode != "" ? `AND k.depcode = '${data.ward.depcode}'` : ''}
 	GROUP BY p.hn
   ORDER BY vsttime`);
