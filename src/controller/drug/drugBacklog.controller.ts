@@ -53,7 +53,7 @@ export const SearchPatient = async (req: Request, res: Response) => {
     const query: any = await dbHos.raw(`SELECT 
     *
 FROM patient p
-WHERE p.cid = "${slug}" OR p.hn = "${slug}" OR CONCAT(p.fname," ",p.lname) LIKE "%${slug}%"`);
+WHERE p.cid = "${slug}" OR p.hn = "${slug}" OR CONCAT(p.fname," ",p.lname) LIKE "%${slug}%" LIMIT 20`);
     return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
@@ -122,6 +122,17 @@ export const findVn = async (req: Request, res: Response) => {
     } else {
       return res.json({ status: 301, results: findVn });
     }
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const GetVnByHn = async (req: Request, res: Response) => {
+  const { hn } = req.params;
+  try {
+    const query: any =
+      await dbHos.raw(`SELECT o.vn, o.vstdate FROM ovst o WHERE o.hn = "${hn}"
+    ORDER BY o.vstdate DESC`);
+    return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }

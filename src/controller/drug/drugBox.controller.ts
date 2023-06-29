@@ -307,34 +307,19 @@ export const getWard = async (req: Request, res: Response) => {
   }
 };
 export const addBox = async (req: Request, res: Response) => {
+  const { data } = req.body;
   try {
-    const checkText = await dbApp("drug_box").where(
-      "drug_box_name",
-      req.body.drug_box_name
-    );
-    if (checkText.length > 0) {
-      return res.json({ status: 301, results: "same name" });
-    }
-    const query = await dbApp("drug_box").insert({
-      drug_box_name: req.body.drug_box_name,
-    });
+    const query = await DrugBoxs.create(data);
+
     return res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
 };
 export const addDrug = async (req: Request, res: Response) => {
+  const {data} = req.body
   try {
-    const checkText = await dbApp("drug").where(
-      "drug_name",
-      req.body.drug_name
-    );
-    if (checkText.length > 0) {
-      return res.json({ status: 301, results: "same name" });
-    }
-    const query = await dbApp("drug").insert({
-      drug_name: req.body.drug_name,
-    });
+    const query = await drugBoxItems.create(data);
     return res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
@@ -343,6 +328,26 @@ export const addDrug = async (req: Request, res: Response) => {
 export const getDrug = async (req: Request, res: Response) => {
   try {
     const query = await dbApp("drug").select("*");
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const DelDrugBox = async (req: Request, res: Response) => {
+  const { _id } = req.params;
+  try {
+    const query = await DrugBoxs.deleteOne({ _id: _id });
+
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const DelDrugItem = async (req: Request, res: Response) => {
+  const { _id } = req.params;
+  try {
+    const query = await drugBoxItems.deleteOne({ _id: _id });
 
     return res.json({ status: 200, results: query });
   } catch (error: any) {
