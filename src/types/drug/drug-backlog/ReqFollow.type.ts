@@ -1,16 +1,4 @@
-export interface ReqFollowType {
-  fullname: string
-  hn: string
-  cid: string
-  visit: Visit[]
-}
-
-export interface Visit {
-  opitemrece: Opitemrece[]
-  vn: string
-}
-
-export interface Opitemrece {
+export interface drugVnFromHosType {
   drug_name: string
   units: string
   strength: string
@@ -29,4 +17,30 @@ export interface Opitemrece {
   item_no: number
   sum_price: number
   cost: number
+  index: number
+  stale?: number
+}
+
+export interface PatientType {
+  fullname: string
+  hos_guid: string
+  vn: string
+  hn: string
+  vstdate: string
+  pttype: string
+  cid: string
+  department: string
+}
+export interface VnType {
+  vn: string
+  vstdate: string
+}
+
+export interface DrugBackLogsAddType {
+  fullname: String
+  hn: String
+  cid: String
+  vn: String
+  vstdate: String
+  opitemrece: drugVnFromHosType[]
 }

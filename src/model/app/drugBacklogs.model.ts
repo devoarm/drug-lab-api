@@ -72,16 +72,18 @@ const schema = new Schema(
             cost: {
               type: "Number",
             },
-            sent: {
-              type: "Boolean",
-              default: false,
+            index: {
+              type: "Number",
+            },
+            stale: {
+              type: "String",
             },
           },
         ],
         vn: {
           type: "String",
           required: true,
-        },
+        },          
       },
     ],
   },
@@ -90,5 +92,5 @@ const schema = new Schema(
   }
 );
 
-const Patients = model("patients", schema);
-export default Patients;
+const DrugBacklogs = model("drug_backlogs", schema);
+export default DrugBacklogs;
