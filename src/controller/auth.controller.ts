@@ -68,16 +68,16 @@ export const RegisterController = async (req: Request, res: Response) => {
   try {
     const checkUsername = await dbApp("user").where(
       "username",
-      form.data.username
+      form.username
     );
     if (checkUsername.length > 0) {
       return res.json({ status: 301, results: "user used" });
     } else {
       bcrypt
-        .hash(form.data.password, saltRounds)
+        .hash(form.password, saltRounds)
         .then(async (hash: any) => {
           const insertUser = await dbApp("user").insert({
-            ...form.data,
+            ...form,
             password: hash,
             create_at: moment().format("YYYY-MM-DD HH:MM:ss"),
           });

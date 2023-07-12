@@ -31,7 +31,7 @@ export const registerNhso = async (req: Request, res: Response) => {
   }
 };
 export const checkAuthByDate = async (req: Request, res: Response) => {
-  const { data } = req.body;
+  const data = req.body;
   try {
     const query = await dbHos.raw(`SELECT 
 		p.cid,

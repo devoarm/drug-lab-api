@@ -28,7 +28,7 @@ export const GetMenuRole = async (req: Request, res: Response) => {
   }
 };
 export const AddMenu = async (req: Request, res: Response) => {
-  const data: any = req.body.data;
+  const data: any = req.body;
   try {
     const query = await dbApp("menu").insert(data);
     const updateAction = await dbApp("menu")
@@ -40,7 +40,7 @@ export const AddMenu = async (req: Request, res: Response) => {
   }
 };
 export const UpdateDetailMenu = async (req: Request, res: Response) => {
-  const data: any = req.body.data;
+  const data: any = req.body;
   try {
     const query = await dbApp("menu").where("id", data.id).update(data);
     return res.json({ status: 200, results: query });
@@ -49,7 +49,7 @@ export const UpdateDetailMenu = async (req: Request, res: Response) => {
   }
 };
 export const UpdateIndexMenu = async (req: Request, res: Response) => {
-  const data: any = req.body.data;
+  const data: any = req.body;
   try {
     const query = await dbApp("menu")
       .where("id", data.id)

@@ -1331,7 +1331,6 @@ dbudgetRoutes.get(
     const { pttype } = req.params;
     const { date1 } = req.params;
     const { date2 } = req.params;
-
     try {
       var sql = `SELECT
   v.vn,

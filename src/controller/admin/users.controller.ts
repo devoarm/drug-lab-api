@@ -41,7 +41,7 @@ export const DelUser = async (req: Request, res: Response) => {
 };
 export const AddRole = async (req: Request, res: Response) => {
   try {
-    const query = await dbApp("role_user").insert(req.body.data);
+    const query = await dbApp("role_user").insert(req.body);
     return res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });

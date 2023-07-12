@@ -12,9 +12,9 @@ import { ADateNow } from "../util/DateUtil";
 export const AddContent = async (req: Request, res: Response) => {
   try {
     const queryCon = await dbApp("contents").insert({
-      title: req.body.data.title,
-      detail: req.body.data.detail,
-      html: req.body.data.html,
+      title: req.body.title,
+      detail: req.body.detail,
+      html: req.body.html,
       createDate: moment().format("YYYY-MM-DD"),
       createTime: moment().format("HH:MM:ss"),
     });
@@ -25,7 +25,7 @@ export const AddContent = async (req: Request, res: Response) => {
 };
 export const AddRoleContent = async (req: Request, res: Response) => {
     try {
-      const query = await dbApp('role_content').insert(req.body.data);
+      const query = await dbApp('role_content').insert(req.body);
       return res.json({ status: 200, results: query });
     } catch (error: any) {
       return res.json({ status: 500, results: error.message });

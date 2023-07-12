@@ -11,7 +11,7 @@ import BookYear from "../../model/app/bookYear.model";
 //start new database
 export const BookSendToSign = async (req: Request, res: Response) => {
   const _id = req.params;
-  const { data } = req.body;
+  const data = req.body;
   try {
     const query = await BookIns.updateOne(
       { _id: _id },
@@ -65,7 +65,7 @@ export const GetBookYear = async (req: Request, res: Response) => {
 };
 export const AddBookYear = async (req: Request, res: Response) => {
   try {
-    const { data } = req.body;
+    const data = req.body;
     const query = await BookYear.create(data);
     return res.json({ status: 200, results: query });
   } catch (error: any) {

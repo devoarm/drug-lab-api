@@ -1,7 +1,4 @@
 export type reqRegister = {
-  data:data
-}
-type data = {
   username: string;
   password: string;
   p_name: string;

@@ -14,7 +14,7 @@ require("dotenv").config();
 const DOCUMENT_BOOKIN_PATH = process.env.DOCUMENT_BOOKIN_PATH;
 
 export const bookStaf = async (req: Request, res: Response) => {
-  const { data } = req.body;
+  const data = req.body;
   try {
     const query = await dbOffice.raw(`SELECT 
     b.*,
@@ -136,7 +136,7 @@ export const UpdateFileWebBooks = async (req: Request, res: Response) => {
 export const addBooks = async (req: Request, res: Response) => {
   try {
     const { num } = req.params;
-    const { data } = req.body;
+    const data = req.body;
     const query = await BookIns.create({ ...data, num_in: num });
     return res.json({ status: 200, results: query._id });
   } catch (error: any) {
@@ -147,7 +147,7 @@ export const addBooks = async (req: Request, res: Response) => {
 export const UpdateBooks = async (req: Request, res: Response) => {
   try {
     const { idBook } = req.params;
-    const { data } = req.body;
+    const data = req.body;
     const findBook = await BookIns.findOneAndUpdate(
       { _id: idBook },
       { ...data }
@@ -266,7 +266,7 @@ export const getMaxBook = async (req: Request, res: Response) => {
 };
 export const changeLeader = async (req: Request, res: Response) => {
   try {
-    const { data } = req.body;
+    const data = req.body;
     await Leader.deleteMany({});
     const query = await Leader.create(data);
     res.json({ status: 200, results: data });

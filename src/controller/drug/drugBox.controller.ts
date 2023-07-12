@@ -114,7 +114,7 @@ export const getPerson = async (req: Request, res: Response) => {
 };
 export const sendBox = async (req: Request, res: Response) => {
   const { _id } = req.query;
-  const { data } = req.body;
+  const data = req.body;
   try {
     const findNew: any = await DrugBoxs.findOne(
       { _id: _id },
@@ -170,7 +170,7 @@ export const sendBox = async (req: Request, res: Response) => {
 };
 export const receiveBox = async (req: Request, res: Response) => {
   const { _id } = req.query;
-  const { data } = req.body;
+  const data = req.body;
 
   try {
     const findNew: any = await DrugBoxs.findOne(
@@ -239,7 +239,7 @@ export const receiveBox = async (req: Request, res: Response) => {
 };
 export const prepareBox = async (req: Request, res: Response) => {
   const { _id } = req.query;
-  const { data } = req.body;
+  const data = req.body;
   const finalData = {
     ...data,
     status: "prepare",
@@ -307,7 +307,7 @@ export const getWard = async (req: Request, res: Response) => {
   }
 };
 export const addBox = async (req: Request, res: Response) => {
-  const { data } = req.body;
+  const data = req.body;
   try {
     const query = await DrugBoxs.create(data);
 

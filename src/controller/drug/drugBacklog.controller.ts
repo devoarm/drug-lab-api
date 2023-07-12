@@ -83,7 +83,7 @@ export const SearchPatientByVn = async (req: Request, res: Response) => {
   }
 };
 export const FollowVisit = async (req: Request, res: Response) => {
-  const data: DrugBackLogsAddType = req.body.data;
+  const data: DrugBackLogsAddType = req.body;
   try {
     const findVn = await DrugVisits.findOne({ vn: data.vn });
     if (!findVn) {
@@ -108,7 +108,6 @@ export const FollowVisit = async (req: Request, res: Response) => {
   }
 };
 export const GetStalVn = async (req: Request, res: Response) => {
-  
   try {
     const findVn = await DrugVisits.aggregate([
       // Get just the docs that contain a shapes element where color is 'red'
@@ -126,12 +125,13 @@ export const GetStalVn = async (req: Request, res: Response) => {
           hn: 1,
           fullname: 1,
           vstdate: 1,
+          isContact: 1,
         },
       },
     ]);
     if (findVn) {
       const filQ = findVn.filter((item: any) => item.opitemrece.length > 0);
-      return res.json({ status: 200, results: filQ });      
+      return res.json({ status: 200, results: filQ });
     } else {
       return res.json({ status: 301, results: findVn });
     }
@@ -190,6 +190,18 @@ export const GetStalByHn = async (req: Request, res: Response) => {
     } else {
       return res.json({ status: 301, results: findVn });
     }
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const UpdateContact = async (req: Request, res: Response) => {
+  const { vn } = req.params;  
+  try {
+    const findVn = await DrugVisits.updateOne(
+      { vn: vn },
+      { isContact: req.body.isContact }
+    );
+    return res.json({ status: 200, results: findVn });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }

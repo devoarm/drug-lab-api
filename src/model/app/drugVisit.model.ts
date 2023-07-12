@@ -19,6 +19,10 @@ const schema = new Schema(
     vstdate: {
       type: "String",
     },
+    isContact:{
+      type: Boolean,
+      default: false
+    },
     opitemrece: [
       {
         drug_name: {
