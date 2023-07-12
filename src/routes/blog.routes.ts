@@ -43,6 +43,32 @@ blogRouter.get("/", async (req, res) => {
     res.json({ status: 500, results: error.message });
   }
 });
+blogRouter.get("/contents", async (req, res) => {
+  try {
+    const query = await dbWebBlog.raw(`SELECT
+    c.id as content_id,
+    c.cat_id as cat_id,
+    c.user_id as user_id,
+    CONCAT(u.firstname,' ',u.lastname) as fullname,
+    u.email as email,
+    cat.name as type_content,
+    c.subject as subject,
+    c.description as description,
+    c.content_file as content_file,
+    c.attach_files as attach_file,
+    c.content_date as content_date,
+    c.date_create as date_create,
+    c.last_update as last_update
+    FROM user u
+    INNER JOIN content c ON c.user_id = u.id
+    INNER JOIN cat cat ON cat.id = c.cat_id
+    ORDER BY c.id DESC`);
+    res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    res.json({ status: 500, results: error.message });
+  }
+});
+
 blogRouter.get("/content/:id", async (req, res) => {
   const { id } = req.params
   try {
