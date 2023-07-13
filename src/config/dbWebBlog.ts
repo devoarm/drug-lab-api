@@ -11,16 +11,16 @@ const dbWebBlog:Knex = knex({
     port: 3306,
     user: 'queue',
     password: 'aranFvg8zjkowfh',
-    database: 'frontend',
+    database: 'webaranhos',
   },
   pool: {
     min: 0,
     max: 7,
-    // afterCreate: (conn: any, done: any) => {
-    //   conn.query("SET NAMES utf8mb4", (err: any) => {
-    //     done(err, conn);
-    //   });
-    // },
+    afterCreate: (conn: any, done: any) => {
+      conn.query("SET NAMES utf8mb4", (err: any) => {
+        done(err, conn);
+      });
+    },
   },
 });
 
