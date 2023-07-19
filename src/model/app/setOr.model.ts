@@ -2,6 +2,7 @@ import { Schema, model } from "mongoose";
 
 const schema = new Schema(
   {
+    hn: { type: String, required: true },
     body_weight: { type: Number, required: true },
     from_ward: {
       depcode: { type: String, required: true },
