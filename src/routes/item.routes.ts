@@ -1,12 +1,21 @@
 import express, { ErrorRequestHandler, Request, Response } from "express";
 
-import { HosWard, getDepart, getGroup, getLeader, getPerson } from "../controller/item.controller";
+import {
+    HosDoctor,
+  HosWard,
+  getDepart,
+  getGroup,
+  getLeader,
+  getPerson,
+} from "../controller/item.controller";
+import verifyToken from "../middleware/auth";
 
 const itemRoutes = express.Router();
-itemRoutes.get("/hr-group", getGroup);
-itemRoutes.get("/hr-department", getDepart);
-itemRoutes.get("/hr-person", getPerson);
-itemRoutes.get("/leader", getLeader);
-itemRoutes.get("/ward", HosWard);
+itemRoutes.get("/hr-group", verifyToken, getGroup);
+itemRoutes.get("/hr-department", verifyToken, getDepart);
+itemRoutes.get("/hr-person", verifyToken, getPerson);
+itemRoutes.get("/leader", verifyToken, getLeader);
+itemRoutes.get("/ward", verifyToken, HosWard);
+itemRoutes.get("/doctor", verifyToken, HosDoctor);
 
 export default itemRoutes;

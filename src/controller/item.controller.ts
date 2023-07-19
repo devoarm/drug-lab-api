@@ -119,3 +119,17 @@ export const HosWard = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const HosDoctor = async (req: Request, res: Response) => {
+  try {
+    const query = await dbHos.raw(`SELECT 
+    d.code,
+    d.name 
+  FROM doctor d 
+  WHERE
+    d.active = 'Y'
+    AND d.position_id = '1'`)
+    return res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
