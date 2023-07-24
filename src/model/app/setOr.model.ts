@@ -22,6 +22,9 @@ const schema = new Schema(
       id: { type: String },
       fullname: { type: String },
     },
+    status: { type: String },
+    urgency: { type: String },
+    anes: { type: Boolean },
   },
   {
     timestamps: true,

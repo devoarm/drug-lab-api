@@ -5,7 +5,18 @@ import axios from "axios";
 
 export const getSetOr = async (req: Request, res: Response) => {
   try {
-    const q = await SetOr.find()
+    const q = await SetOr.find().sort({ date_time_surgery: -1 });
+    return res.json({ status: 200, results: q });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const updateStatus = async (req: Request, res: Response) => {
+  try {
+    const q = await SetOr.updateOne(
+      { _id: req.body._id },
+      { status: req.body.status }
+    );
     return res.json({ status: 200, results: q });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
