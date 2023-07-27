@@ -53,7 +53,8 @@ export const checkAuthByDate = async (req: Request, res: Response) => {
 	WHERE o.vstdate = '${data.vstdate}'
   AND p.nationality = '99'
   AND o.pttype NOT IN('10','12','30','01','40')
-  ${data.ward.depcode != "" ? `AND k.depcode = '${data.ward.depcode}'` : ''}
+  AND o.vsttime between '${data.timeStart}' and '${data.timeEnd}'
+  ${data.ward.depcode != "" ? `AND k.depcode = '${data.ward.depcode}'` : ""}
 	GROUP BY p.hn
   ORDER BY vsttime`);
 

@@ -65,7 +65,7 @@ export const PersonSendToSign = async (req: Request, res: Response) => {
       return {
         ...item,
         send:
-          checkQ[0].filter((f: any) => f.SEND_LD_HR_ID == item.ID).length > 0
+          checkQ[0].filter((f: any) => f.SEND_LD_HR_ID == item.id).length > 0
             ? true
             : false,
       };

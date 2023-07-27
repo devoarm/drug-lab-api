@@ -1,20 +1,12 @@
 import express, { Request, Response } from "express";
-import MessageResponse from "../interfaces/MessageResponse";
-import jwt_decode from "jwt-decode";
-import dbApp from "../config/dbApp";
-
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { reqRegister } from "../interfaces/auth.type";
 import moment from "moment";
 import dbOffice from "../config/dbOffice";
-const secret: any = process.env.SECRET_KEY;
-const saltRounds = 10;
 import fs from "fs";
-import Departments from "../model/app/departments.model";
+
 import Leader from "../model/app/leaders.model";
 import dbHos from "../config/dbHos";
-
+import dotenv from "dotenv";
+dotenv.config();
 export const mapDepart = async (req: Request, res: Response) => {
   try {
     const hr_department = await dbOffice("hr_department");
@@ -105,15 +97,21 @@ export const getPerson = async (req: Request, res: Response) => {
 };
 export const getLeader = async (req: Request, res: Response) => {
   try {
-    const query = await Leader.findOne();
-    return res.json({ status: 200, results: query });
+    const leaderId = process.env.LEADER_ID;
+    const leaderName = process.env.LEADER_NAME;
+    return res.json({
+      status: 200,
+      results: { id: leaderId, name: leaderName },
+    });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
 };
 export const HosWard = async (req: Request, res: Response) => {
   try {
-    const query = await dbHos.raw(`SELECT k.depcode,k.department FROM kskdepartment k`)
+    const query = await dbHos.raw(
+      `SELECT k.depcode,k.department FROM kskdepartment k`
+    );
     return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
@@ -127,7 +125,7 @@ export const HosDoctor = async (req: Request, res: Response) => {
   FROM doctor d 
   WHERE
     d.active = 'Y'
-    AND d.position_id = '1'`)
+    AND d.position_id = '1'`);
     return res.json({ status: 200, results: query[0] });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });

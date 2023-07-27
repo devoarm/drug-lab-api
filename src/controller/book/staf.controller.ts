@@ -76,20 +76,18 @@ export const addFileBooks = async (req: Request, res: Response) => {
     });
     var upload = multer({ storage: storage }).single("pdf");
 
-    upload(req, res, function (err) {
+    upload(req, res, async function (err) {
       if (err) {
-        console.log(err);
         return res.json({ status: 500, results: err.message });
       } else {
+        const query = await dbOffice("book_index_img").insert({
+          BOOK_ID: `${num}`,
+          FILE_TYPE: req.file?.fieldname,
+          FILE_SIZE_MB: req.file?.size,
+        });
         return res.json({
           status: 200,
-          results: {
-            file: {
-              name: num,
-              type: req.file?.fieldname,
-              size: req.file?.size,
-            },
-          },
+          results: query,
         });
       }
     });
@@ -107,7 +105,7 @@ export const UpdateFileWebBooks = async (req: Request, res: Response) => {
       filename: function (req: Request, file, callback) {
         // const ext = file.mimetype.split("/").filter(Boolean).slice(1).join("/");
         // callback(null, `${num}.${ext}`);
-        callback(null, `${num}.${file.fieldname}`);
+        callback(null, `${num}.pdf`);
       },
     });
     var upload = multer({ storage: storage }).single("pdf");
@@ -117,16 +115,10 @@ export const UpdateFileWebBooks = async (req: Request, res: Response) => {
         console.log(err);
         return res.json({ status: 500, results: err.message });
       } else {
-        return res.json({
-          status: 200,
-          results: {
-            file: {
-              name: num,
-              type: req.file?.fieldname,
-              size: req.file?.size,
-            },
-          },
-        });
+        const base64Data = req.body.pdf;
+        const binaryData = Buffer.from(base64Data, "base64");
+        fs.writeFileSync(`${DOCUMENT_BOOKIN_PATH}/${num}.pdf`, binaryData);
+        res.json({ status: 200, results: "ok" });
       }
     });
   } catch (error: any) {
@@ -135,10 +127,26 @@ export const UpdateFileWebBooks = async (req: Request, res: Response) => {
 };
 export const addBooks = async (req: Request, res: Response) => {
   try {
-    const { num } = req.params;
     const data = req.body;
-    const query = await BookIns.create({ ...data, num_in: num });
-    return res.json({ status: 200, results: query._id });
+    const qCheck = await dbOffice("book_index")
+      .select("*")
+      .orderBy("id", "desc")
+      .first();
+    const query = await dbOffice("book_index").insert({
+      ...data,
+      BOOK_NUM_IN: qCheck ? qCheck?.BOOK_NUM_IN! + 1 : 1,
+    });
+    return res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    console.log(error.message);
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const SendToCheck = async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const query = await dbOffice("book_index_send_check").insert(data);
+    return res.json({ status: 200, results: query });
   } catch (error: any) {
     console.log(error.message);
     return res.json({ status: 500, results: error.message });
@@ -245,19 +253,24 @@ export const convertBookToNoSql = async (req: Request, res: Response) => {
 };
 export const getMaxBook = async (req: Request, res: Response) => {
   try {
-    const query = await BookIns.aggregate([
-      { $group: { _id: null, maxField: { $max: "$num_in" } } },
-    ]);
-    // return res.json({ status: 200, results: query});
-    if (query.length == 0) {
-      return res.json({ status: 200, results: 1 });
-    } else {
-      if (query[0].maxField) {
-        return res.json({ status: 200, results: query[0].maxField + 1 });
-      } else {
-        return res.json({ status: 200, results: 1 });
-      }
-    }
+    // const query = await dbOffice("book_index")
+    //   .select("*")
+    //   .orderBy("id", "desc")
+    //   .first();
+    const query = await dbOffice("book_index_send_check");
+    // const query = await BookIns.aggregate([
+    //   { $group: { _id: null, maxField: { $max: "$num_in" } } },
+    // ]);
+    // // return res.json({ status: 200, results: query});
+    // if (query.length == 0) {
+    //   return res.json({ status: 200, results: 1 });
+    // } else {
+    //   if (query[0].maxField) {
+    //     return res.json({ status: 200, results: query[0].maxField + 1 });
+    //   } else {
+    //   }
+    // }
+    return res.json({ status: 200, results: { ...query } });
   } catch (error: any) {
     res.json({ status: 500, results: error.message });
     console.log("error");
