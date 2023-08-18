@@ -59,7 +59,9 @@ export const PersonSendToSign = async (req: Request, res: Response) => {
       LEFT JOIN hr_prefix pf ON hp.HR_PREFIX_ID = pf.HR_PREFIX_ID`);
 
     const checkQ: any = await dbOffice.raw(
-      `SELECT * FROM book_index_send_check b WHERE b.BOOK_ID = '${idBook}'`
+      `SELECT * FROM book_index_send_check b ${
+        idBook ? `WHERE b.BOOK_ID = '${idBook}'` : ""
+      } `
     );
     const qMap = query[0].map((item: any) => {
       return {

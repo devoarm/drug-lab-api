@@ -39,6 +39,7 @@ export const bookStaf = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+
 export const searchBooks = async (req: Request, res: Response) => {
   const query = await dbOffice("book_index_send_leader as bl")
     .leftJoin("book_index as b", "bl.BOOK_ID", "b.ID")
@@ -287,5 +288,65 @@ export const changeLeader = async (req: Request, res: Response) => {
     res.json({ status: 500, results: error.message });
     console.log("error");
     console.log(error.message);
+  }
+};
+export const GetDepartSubSendBook = async (req: Request, res: Response) => {
+  const { idBook, dep } = req.query;
+  try {
+    const query = await dbOffice.raw(`SELECT
+    hr_department_sub.*
+  FROM
+    hr_department_sub
+  WHERE ACTIVE = "TRUE"
+	AND HR_DEPARTMENT_ID = '03'`);
+    const qBook = await dbOffice.raw(`SELECT 	
+    sd.*,
+    b.BOOK_NUM_IN,
+    b.DATE_TIME_SAVE,
+    b.BOOK_NAME,
+    b.BOOK_NUMBER,
+    b.BOOK_DATE,
+    b.BOOK_DETAIL,
+    b.BOOK_URGENT_ID,
+    bu.URGENT_NAME,
+    bi.ID as BOOK_IMAGE_ID,
+    bi.FILE_TYPE,				
+    bt.BOOK_TYPE_NAME,
+    ds.HR_DEPARTMENT_ID,
+    ds.HR_DEPARTMENT_SUB_NAME 
+  FROM book_send_dep sd
+  LEFT JOIN hr_department_sub ds ON ds.HR_DEPARTMENT_SUB_ID = sd.HR_DEPARTMENT_SUB_ID
+  LEFT JOIN book_index b ON sd.BOOK_ID = b.ID
+  LEFT JOIN book_index_img bi ON bi.BOOK_ID = b.ID
+  LEFT JOIN book_urgent bu ON bu.URGENT_ID = b.BOOK_URGENT_ID
+  LEFT JOIN book_type bt ON bt.BOOK_TYPE_ID = b.BOOK_TYPE_ID  
+  WHERE sd.BOOK_ID != '' AND b.BOOK_NAME IS NOT NULL AND ds.HR_DEPARTMENT_ID = '${dep}' AND sd.BOOK_ID = "${idBook}"
+  ORDER BY b.DATE_TIME_SAVE DESC`);
+    const mq = query[0].map((item: any) => {
+      return {
+        ...item,
+        send:
+          qBook[0].filter(
+            (f: any) => f.HR_DEPARTMENT_SUB_ID == item.HR_DEPARTMENT_SUB_ID
+          ).length > 0
+            ? true
+            : false,
+      };
+    });
+    res.json({ status: 200, results: mq });
+  } catch (error: any) {
+    res.json({ status: 500, results: error.message });
+    console.log("error");
+    console.log(error.message);
+  }
+};
+export const PostDepartSubSendBook = async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    
+    const query = await dbOffice("book_send_dep").insert(data);
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
   }
 };

@@ -18,6 +18,7 @@ import authenNhsoRouter from "./authenNhso.routes";
 import dbudgetRoutes from "./dbudget.routes";
 import nurseRouter from "./nurse/index.routes";
 import roleRoutes from "./role.routes";
+import hosNavigatorRoutes from "./hosNavigator.routes";
 
 
 
@@ -43,5 +44,6 @@ router.use("/auth-nhso", authenNhsoRouter);
 router.use("/dbudget", dbudgetRoutes);
 router.use("/nurse", nurseRouter);
 router.use("/role", roleRoutes);
+router.use("/hos-navigator", hosNavigatorRoutes);
 
 export default router;

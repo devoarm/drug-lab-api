@@ -8,6 +8,7 @@ import api from "./routes";
 import MessageResponse from "./interfaces/MessageResponse";
 import mongoose from "mongoose";
 import dbAppMong from "./config/dbAppMong";
+import path from "path";
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use('/upload/diagrams-hos', express.static(path.join(__dirname, '../upload/diagrams-hos')))
 app.get<{}, MessageResponse>("/", (req, res) => {
   res.json({
     status: 200,

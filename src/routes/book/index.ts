@@ -30,6 +30,8 @@ import {
   BookOnRead,
   BookReadAllGroup,
   BookReading,
+  BookSendDepart,
+  BookSendDepartSub,
   BookSendPerson,
   BookSendToSecretary,
   BookSendToSign,
@@ -69,6 +71,8 @@ bookRouter.get("/book-index-history-leader", BookHistoryLeader);
 
 bookRouter.post("/book-reading", BookReading);
 bookRouter.post("/book-read-all-group", BookReadAllGroup);
+
+bookRouter.get("/book-send-depart-sub", BookSendDepartSub);
 
 //new database
 bookRouter.get("/org", getOrg);

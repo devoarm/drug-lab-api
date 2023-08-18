@@ -656,3 +656,63 @@ export const BookReadAllGroup = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error });
   }
 };
+export const BookSendDepart = async (req: Request, res: Response) => {
+  const {id} = req.params
+  try {
+    const query = await dbOffice.raw(`SELECT 	
+    sd.*,
+    b.BOOK_NUM_IN,
+    b.DATE_TIME_SAVE,
+    b.BOOK_NAME,
+    b.BOOK_NUMBER,
+    b.BOOK_DATE,
+    b.BOOK_DETAIL,
+    b.BOOK_URGENT_ID,
+    bu.URGENT_NAME,
+    bi.ID as BOOK_IMAGE_ID,
+    bi.FILE_TYPE,				
+    bt.BOOK_TYPE_NAME  
+  FROM book_send sd
+  LEFT JOIN hr_department ds ON ds.HR_DEPARTMENT_ID = sd.HR_DEPARTMENT_ID
+  LEFT JOIN book_index b ON sd.BOOK_ID = b.ID
+  LEFT JOIN book_index_img bi ON bi.BOOK_ID = b.ID
+  LEFT JOIN book_urgent bu ON bu.URGENT_ID = b.BOOK_URGENT_ID
+  LEFT JOIN book_type bt ON bt.BOOK_TYPE_ID = b.BOOK_TYPE_ID
+  
+  WHERE sd.BOOK_ID != '' AND b.BOOK_NAME IS NOT NULL AND ds.HR_DEPARTMENT_ID = '03' and sd.BOOK_ID = '${id}' 
+  ORDER BY b.DATE_TIME_SAVE DESC`); 
+    res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
+export const BookSendDepartSub = async (req: Request, res: Response) => {
+  
+  try {
+    const query = await dbOffice.raw(`SELECT 	
+    sd.*,
+    b.BOOK_NUM_IN,
+    b.DATE_TIME_SAVE,
+    b.BOOK_NAME,
+    b.BOOK_NUMBER,
+    b.BOOK_DATE,
+    b.BOOK_DETAIL,
+    b.BOOK_URGENT_ID,
+    bu.URGENT_NAME,
+    bi.ID as BOOK_IMAGE_ID,
+    bi.FILE_TYPE,				
+    bt.BOOK_TYPE_NAME  
+  FROM book_send sd
+  LEFT JOIN hr_department ds ON ds.HR_DEPARTMENT_ID = sd.HR_DEPARTMENT_ID
+  LEFT JOIN book_index b ON sd.BOOK_ID = b.ID
+  LEFT JOIN book_index_img bi ON bi.BOOK_ID = b.ID
+  LEFT JOIN book_urgent bu ON bu.URGENT_ID = b.BOOK_URGENT_ID
+  LEFT JOIN book_type bt ON bt.BOOK_TYPE_ID = b.BOOK_TYPE_ID
+  
+  WHERE sd.BOOK_ID != '' AND b.BOOK_NAME IS NOT NULL AND ds.HR_DEPARTMENT_ID = '03' 
+  ORDER BY b.DATE_TIME_SAVE DESC`); 
+    res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
