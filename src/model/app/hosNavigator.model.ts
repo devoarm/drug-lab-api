@@ -28,7 +28,7 @@ const schema = new Schema(
       type: "String",
     },
     droppable: { type: "Boolean" },
-    emphasis: { type: "Number" },
+    emphasis: { type: "Number", default: 2 },
   },
   {
     timestamps: true,

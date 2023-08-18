@@ -15,7 +15,7 @@ export const GetDep = async (req: Request, res: Response) => {
     { __v: 0, createdAt: 0, updatedAt: 0 }
   ).sort({
     index: 1,
-    emphasis: -1,
+    emphasis: 1,
   });
   return res.json({ status: 200, results: query });
 };
@@ -35,7 +35,10 @@ export const SearchDep = async (req: Request, res: Response) => {
     const query = await HosNavigatorModel.find(
       { text: { $regex: `.*${slug}.*` } },
       { __v: 0, createdAt: 0, updatedAt: 0 }
-    );
+    ).sort({
+      index: 1,
+      emphasis: 1,
+    });
     return res.json({ status: 200, results: query });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
