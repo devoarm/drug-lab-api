@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use('/upload/diagrams-hos', express.static(path.join(__dirname, '../upload/diagrams-hos')))
+app.use('/upload/diagrams-hos', express.static(`${process.env.UPLOAD_PATH}/diagrams-hos`))
 app.get<{}, MessageResponse>("/", (req, res) => {
   res.json({
     status: 200,
