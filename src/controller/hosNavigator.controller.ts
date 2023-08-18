@@ -15,7 +15,7 @@ export const GetDep = async (req: Request, res: Response) => {
     { __v: 0, createdAt: 0, updatedAt: 0 }
   ).sort({
     index: 1,
-    emphasis:-1
+    emphasis: -1,
   });
   return res.json({ status: 200, results: query });
 };
@@ -67,7 +67,7 @@ export const GetDepById = async (req: Request, res: Response) => {
 
 export const AddDep = async (req: Request, res: Response) => {
   try {
-    const projectRoot = path.resolve(__dirname, "../../upload/diagrams-hos"); // Move up one directory
+    const projectRoot = `${process.env.UPLOAD_PATH}/diagrams-hos`;
 
     const storage = multer.diskStorage({
       destination: function (req: Request, file, callback) {
@@ -118,7 +118,7 @@ export const UpdateIndexDep = async (req: Request, res: Response) => {
 };
 export const UploadImgDev = async (req: Request, res: Response) => {
   try {
-    const projectRoot = path.resolve(__dirname, "../../upload/diagrams-hos"); // Move up one directory
+    const projectRoot = `${process.env.UPLOAD_PATH}/diagrams-hos`;
 
     const storage = multer.diskStorage({
       destination: function (req: Request, file, callback) {
@@ -149,7 +149,7 @@ export const UploadImgDev = async (req: Request, res: Response) => {
 };
 export const UpdateImgDev = async (req: Request, res: Response) => {
   try {
-    const projectRoot = path.resolve(__dirname, "../../upload/diagrams-hos"); // Move up one directory
+    const projectRoot = `${process.env.UPLOAD_PATH}/diagrams-hos`;
 
     const storage = multer.diskStorage({
       destination: function (req: Request, file, callback) {
@@ -166,7 +166,7 @@ export const UpdateImgDev = async (req: Request, res: Response) => {
         return res.json({ status: 500, results: err.message });
       } else {
         const jsonData = JSON.parse(req.body.data);
-        const finalData = { ...jsonData, img: req.file?.filename };        
+        const finalData = { ...jsonData, img: req.file?.filename };
         // return
         const updateD = await HosNavigatorModel.updateOne(
           { _id: finalData._id },
