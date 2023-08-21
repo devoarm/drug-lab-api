@@ -82,6 +82,19 @@ export const SearchPatientByVn = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const CommentPatient = async (req: Request, res: Response) => {
+  const data = req.body;
+  const { _id } = req.params;
+  try {
+    const query: any = await DrugVisits.updateOne(
+      { _id: _id },
+      { comment: data.comment }
+    );
+    return res.json({ status: 200, results: query });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
 export const FollowVisit = async (req: Request, res: Response) => {
   const data: DrugBackLogsAddType = req.body;
   try {
@@ -126,6 +139,7 @@ export const GetStalVn = async (req: Request, res: Response) => {
           fullname: 1,
           vstdate: 1,
           isContact: 1,
+          comment:1
         },
       },
     ]);
@@ -195,7 +209,7 @@ export const GetStalByHn = async (req: Request, res: Response) => {
   }
 };
 export const UpdateContact = async (req: Request, res: Response) => {
-  const { vn } = req.params;  
+  const { vn } = req.params;
   try {
     const findVn = await DrugVisits.updateOne(
       { vn: vn },

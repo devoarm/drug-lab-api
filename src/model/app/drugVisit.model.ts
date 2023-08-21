@@ -19,9 +19,12 @@ const schema = new Schema(
     vstdate: {
       type: "String",
     },
-    isContact:{
+    comment: {
+      type: "String",
+    },
+    isContact: {
       type: Boolean,
-      default: false
+      default: false,
     },
     opitemrece: [
       {
