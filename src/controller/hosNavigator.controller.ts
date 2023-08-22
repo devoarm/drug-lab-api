@@ -14,8 +14,8 @@ export const GetDep = async (req: Request, res: Response) => {
     {},
     { __v: 0, createdAt: 0, updatedAt: 0 }
   ).sort({
-    index: 1,
-    emphasis: 1,
+    emphasis: -1,
+    index:-1
   });
   return res.json({ status: 200, results: query });
 };
@@ -25,21 +25,32 @@ export const GetDepByParent = async (req: Request, res: Response) => {
     { parent: id },
     { __v: 0, createdAt: 0, updatedAt: 0 }
   ).sort({
-    index: 1,
+    index: -1,
   });
   return res.json({ status: 200, results: query });
 };
 export const SearchDep = async (req: Request, res: Response) => {
   const { slug } = req.params;
   try {
-    const query = await HosNavigatorModel.find(
-      { text: { $regex: `.*${slug}.*` } },
-      { __v: 0, createdAt: 0, updatedAt: 0 }
-    ).sort({
-      index: 1,
-      emphasis: 1,
-    });
-    return res.json({ status: 200, results: query });
+    if (slug == "all") {
+      const query = await HosNavigatorModel.find(
+        {},
+        { __v: 0, createdAt: 0, updatedAt: 0 }
+      ).sort({
+        emphasis: -1,
+        index: -1,
+      });
+      return res.json({ status: 200, results: query });
+    } else {
+      const query = await HosNavigatorModel.find(
+        { text: { $regex: `.*${slug}.*` } },
+        { __v: 0, createdAt: 0, updatedAt: 0 }
+      ).sort({
+        emphasis: -1,
+        index: -1,
+      });
+      return res.json({ status: 200, results: query });
+    }
   } catch (error: any) {
     return res.json({ status: 500, results: error.message });
   }
