@@ -15,6 +15,7 @@ import {
 import verifyToken from "../../middleware/auth";
 import drugBacklogRouter from "./drug-backlog.routes";
 import drugBoxRouter from "./drug-box.routes";
+import drugCalMedRouter from "./drug-cal-med-vein.routes";
 
 var express = require("express");
 
@@ -22,6 +23,7 @@ var drugRouter = express.Router();
 
 drugRouter.use("/drug-box", drugBoxRouter);
 drugRouter.use("/drug-backlog", drugBacklogRouter);
+drugRouter.use("/drug-cal-med-veim", drugCalMedRouter);
 /* GET home page. */
 drugRouter.get("/drugbox-item", getDrugBoxItem);
 drugRouter.get("/dashboard", verifyToken, getDashboardDrugBox);
