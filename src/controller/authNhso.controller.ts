@@ -72,7 +72,6 @@ export const checkAuthByDate = async (req: Request, res: Response) => {
     ${data.ward.spclty != "" ? ` AND v.spclty = ${data.ward.spclty}` : ""}
     AND p.nationality = '99'`;
   try {
-    console.log(sql)
     const query = await dbHos.raw(sql);
 
     return res.json({ status: 200, results: query[0] });
