@@ -67,6 +67,16 @@ export const HosWard = async (req: Request, res: Response) => {
     return res.json({ status: 500, results: error.message });
   }
 };
+export const HosSpclty = async (req: Request, res: Response) => {
+  try {
+    const query = await dbHos.raw(
+      `SELECT s.spclty,s.name as spclty_name FROM spclty s ORDER BY s.spclty`
+    );
+    return res.json({ status: 200, results: query[0] });
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message });
+  }
+};
 export const HosDoctor = async (req: Request, res: Response) => {
   try {
     const query = await dbHos.raw(`SELECT 

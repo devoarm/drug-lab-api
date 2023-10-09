@@ -1,7 +1,8 @@
 import express, { ErrorRequestHandler, Request, Response } from "express";
 
 import {
-    HosDoctor,
+  HosDoctor,
+  HosSpclty,
   HosWard,
   getDepart,
   getGroup,
@@ -16,6 +17,7 @@ itemRoutes.get("/hr-department", verifyToken, getDepart);
 itemRoutes.get("/hr-person", verifyToken, getPerson);
 itemRoutes.get("/leader", verifyToken, getLeader);
 itemRoutes.get("/ward", verifyToken, HosWard);
+itemRoutes.get("/spclty", verifyToken, HosSpclty);
 itemRoutes.get("/doctor", verifyToken, HosDoctor);
 
 export default itemRoutes;
