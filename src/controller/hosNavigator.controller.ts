@@ -4,9 +4,6 @@ import HosNavigatorModel from "../model/app/hosNavigator.model";
 import multer from "multer";
 import path from "path";
 
-// import { reqRegister } from "../../interface/auth.type";
-
-var jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 export const GetDep = async (req: Request, res: Response) => {
@@ -14,8 +11,8 @@ export const GetDep = async (req: Request, res: Response) => {
     {},
     { __v: 0, createdAt: 0, updatedAt: 0 }
   ).sort({
-    emphasis: -1,
-    index:-1
+    emphasis: 1,
+    index: 1,
   });
   return res.json({ status: 200, results: query });
 };

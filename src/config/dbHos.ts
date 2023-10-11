@@ -12,15 +12,15 @@ const dbHos:Knex = knex({
     password: process.env.passwordHosXp,
     database: process.env.databaseHosXp,
   },
-  pool: {
-    min: 0,
-    max: 7,
-    afterCreate: (conn: any, done: any) => {
-      conn.query("SET NAMES utf8mb4", (err: any) => {
-        done(err, conn);
-      });
-    },
-  },
+  // pool: {
+  //   min: 0,
+  //   max: 7,
+  //   afterCreate: (conn: any, done: any) => {
+  //     conn.query("SET NAMES utf8mb4", (err: any) => {
+  //       done(err, conn);
+  //     });
+  //   },
+  // },
 });
 
 export default dbHos;
