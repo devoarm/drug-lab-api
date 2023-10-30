@@ -15,6 +15,9 @@ const schema = new Schema({
   display_result_text: {
     type: "String",
   },
+  drug_description: {
+    type: "String",
+  },
   formulas: {
     type: ["String"],
   },
