@@ -36,7 +36,7 @@ export const checkAuthByDate = async (req: Request, res: Response) => {
 vp.Auth_Code,
 v.hn,
 v.cid,
-CONCAT(pt.pname,pt.fname,' ',pt.lname) fullname,
+CONCAT(pt.pname,pt.fname,' ',pt.lname) as fullname,
 v.age_y,
 v.pdx,
 o.vstdate,	
@@ -54,6 +54,8 @@ LEFT JOIN spclty s on s.spclty=o.spclty
 LEFT JOIN pttype t on t.pttype=vp.pttype
 WHERE 
 o.vstdate BETWEEN '${data.vstdateStart}' and '${data.vstdateEnd}'
+AND pt.nationality = '99'
+AND v.pttype NOT IN('10','12','30','01','40')
 ${data.ward.spclty != "" ? `AND s.spclty = '${data.ward.spclty}'` : ""}
 ${
   data.timeStart != "00:00:00" && data.timeEnd != "00:00:00"
@@ -64,7 +66,7 @@ ORDER BY o.vstdate,vp.Auth_Code;`;
 
   try {
     const query = await dbHos.raw(sql);
-    return res.json({ status: 200, results: query[0] });
+    return res.json({ status: 200, results: query[0], msg: sql });
   } catch (error: any) {
     return res.json({ status: 500, results: error.message, msg: sql });
   }
