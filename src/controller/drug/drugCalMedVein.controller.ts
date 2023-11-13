@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import DrugUnits from "../../model/app/drugUnits.model";
-import drugCalmedVeinFormulas from "../../model/app/drugCalmedVeinFormulas";
+import drugCalmedVeinFormulas from "../../model/app/drugCalmedVeinFormulas.model";
 
 export const GetUnitType = async (req: Request, res: Response) => {
   try {
