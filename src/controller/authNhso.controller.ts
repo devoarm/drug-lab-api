@@ -33,7 +33,7 @@ export const registerNhso = async (req: Request, res: Response) => {
 export const checkAuthByDate = async (req: Request, res: Response) => {
   const data = req.body;
   const sql = `SELECT 
-vp.Auth_Code,
+vp.auth_code,
 v.hn,
 v.cid,
 CONCAT(pt.pname,pt.fname,' ',pt.lname) as fullname,
