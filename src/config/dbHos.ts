@@ -14,7 +14,7 @@ const dbHos:Knex = knex({
   },
   pool: {
     min: 0,
-    max: 7,
+    max: 30,
     afterCreate: (conn: any, done: any) => {
       conn.query("SET NAMES utf8mb4", (err: any) => {
         done(err, conn);
