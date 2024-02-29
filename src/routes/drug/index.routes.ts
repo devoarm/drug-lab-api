@@ -1,41 +1,18 @@
-import {
-  addBox,
-  addDrug,
-  getDashboardDrugBox,
-  getDrug,
-  getDrugBox,
-  getDrugBoxItem,
-  getPerson,
-  getServiceDrug,
-  getWard,
-  prepareBox,
-  receiveBox,
-  sendBox,
-} from "../../controller/drug/drugBox.controller";
-import verifyToken from "../../middleware/auth";
-import drugBacklogRouter from "./drug-backlog.routes";
-import drugBoxRouter from "./drug-box.routes";
-import drugCalMedRouter from "./drug-cal-med-vein.routes";
+import dbHos from "../../config/dbHos";
 
 var express = require("express");
 
 var drugRouter = express.Router();
 
-drugRouter.use("/drug-box", drugBoxRouter);
-drugRouter.use("/drug-backlog", drugBacklogRouter);
-drugRouter.use("/drug-cal-med-veim", drugCalMedRouter);
-/* GET home page. */
-drugRouter.get("/drugbox-item", getDrugBoxItem);
-drugRouter.get("/dashboard", verifyToken, getDashboardDrugBox);
-drugRouter.get("/list-service", verifyToken, getServiceDrug);
-drugRouter.get("/box", verifyToken, getDrugBox);
-
-drugRouter.get("/ward", verifyToken, getWard);
-
-
-drugRouter.post("/add-box", verifyToken, addBox);
-drugRouter.post("/add-drug", verifyToken, addDrug);
-drugRouter.get("/drug", verifyToken, getDrug);
+drugRouter.get("/pt-lab", async (req: Request, res: any) => {
+  try {
+    const sql = ''
+    const query = await dbHos.raw(``)
+    return res.json({ status: 200, results: query[0] })
+  } catch (error: any) {
+    return res.json({ status: 500, results: error.message })
+  }
+});
 
 export default drugRouter;
 

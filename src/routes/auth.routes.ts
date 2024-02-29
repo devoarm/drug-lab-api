@@ -1,9 +1,9 @@
 import express from "express";
-import { LoginController, MeController, RegisterController } from "../controller/auth.controller";
 
 import MessageResponse from "../interfaces/MessageResponse";
 import emojis from "./emojis";
 import verifyToken from "../middleware/auth";
+import { LoginController } from "../controller/auth.controller";
 
 const authRouter = express.Router();
 
@@ -14,8 +14,7 @@ authRouter.get<{}, MessageResponse>("/", (req, res) => {
   });
 });
 authRouter.post("/login", LoginController);
-authRouter.post("/register", RegisterController);
-authRouter.get("/me/:token",verifyToken,MeController);
+
 
 
 

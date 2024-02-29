@@ -14,21 +14,21 @@ require("dotenv").config();
 
 const app = express();
 
-dbAppMong()
+
 
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use('/upload/diagrams-hos', express.static(`${process.env.UPLOAD_PATH}/diagrams-hos`))
+
 app.get<{}, MessageResponse>("/", (req, res) => {
   res.json({
     status: 200,
-    results: "PHR API Build 2023-03-08 - 👋🌎🌍🌏",
+    results: "AranHos API Build 2024-02-29 - 👋🌎🌍🌏",
   });
 });
 
-app.use("/api/v2", api);
+app.use("/api/v1", api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
